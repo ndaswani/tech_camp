@@ -63,7 +63,7 @@ def view_orders(orders_list, fulfilled_orders, all_or_fulfilled):
     
     for i in range(0, len(orders_list)):
         if all_or_fulfilled == "fulfilled":
-            if is_order_fulfilled(fulfilled_orders, orders_list[i]):
+            if is_order_fulfilled(fulfilled_orders, i):
                 print_order(orders_list,i)
         elif all_or_fulfilled == "all":
             print_order(orders_list,i)
@@ -156,12 +156,10 @@ while True:
                           int(input("Enter order id to fulfill: ")))
             
         case 7:
-            print(fulfilled_orders)
             view_orders(orders_list,
                         fulfilled_orders,
                         "fulfilled")
         case 8:
-            print(fulfilled_orders)
             view_orders(orders_list,
                         fulfilled_orders,
                         "all")
