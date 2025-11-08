@@ -32,27 +32,30 @@ def view_customers():
 def compute_revenue_recognized():
     total_recognized_revenue = 0
     for i in range (len(orders_list)):
-        if is_order_fulfilled(fulfilled_orders_list, i):
-            (customer_id, product_id, qty) = get_order_details(order_list, order)
-            total += qty*prices_list[product_id]
+        if is_order_fulfilled(fulfilled_orders, i):
+            (customer_id, product_id, qty) = get_order_details(orders_list, i)
+            total_recognized_revenue += qty*prices_list[product_id]
     print("Total recognized revenue:", total_recognized_revenue)
 
 def	compute_revenue_bookings():
     total_bookings_revenue = 0
-    for order in orders_list:
-        (customer_id, product_id, qty) =  get_order_details(order_list, order)
-        total+=qty * prices_list[product_id]
+    for i in range(0, len(orders_list)):
+        (customer_id, product_id, qty) =  get_order_details(orders_list, i)
+        total_bookings_revenue+=qty * prices_list[product_id]
     print("Total bookings revenue:" , total_bookings_revenue)
 	    
 
 # NEIL’S CODE
 
 def add_order(orders_list, customer_id, product_id, qty):
-    orders_list.append("" + str(customer_id) + "," + str(product_id) + "," + str(qty))
+    orders_list.append(tuple([customer_id, product_id, qty]))
     
 def get_order_details(orders_list, order_id):
-    return(orders_list[order_id].split(","))
-
+    (customer_id, product_id, qty) = orders_list[order_id]
+    customer_id = customer_id
+    product_id = product_id
+    qty = qty
+    return (customer_id, product_id, qty)
 
 def view_orders(orders_list, fulfilled_orders, all_or_fulfilled):
     if (all_or_fulfilled != "all") and (all_or_fulfilled != "fulfilled"):
@@ -61,7 +64,7 @@ def view_orders(orders_list, fulfilled_orders, all_or_fulfilled):
     for i in range(0, len(orders_list)):
         if all_or_fulfilled == "fulfilled":
             if is_order_fulfilled(fulfilled_orders, orders_list[i]):
-                print_order(orders_list[i])
+                print_order(orders_list,i)
         elif all_or_fulfilled == "all":
             print_order(orders_list,i)
             
@@ -80,7 +83,7 @@ def is_order_fulfilled(fulfilled_orders, order_id):
 
 def fulfill_order(fulfilled_orders, order_id):
     if (not is_order_fulfilled(fulfilled_orders, order_id)):
-        fulfilled_orders.append(order_id)
+        fulfilled_orders.append(int(order_id))
 
 def display_menu():
     print("""
@@ -96,12 +99,13 @@ Welcome to Basic CRM (Customer Relationship Management)!
 8. View all orders
 9. Compute revenue recognized
 10. Compute bookings
-
+11. Quit Program
+    
 Enter choice:""")
 
 def get_valid_user_choice():
     choice = -1
-    while not ((choice >=1) and (choice <=10)):
+    while not ((choice >=1) and (choice <=11)):
         if not choice == -1:
             print ("Try again. Choose an option between 1 and 10.")
         choice = int(input())
@@ -152,10 +156,12 @@ while True:
                           int(input("Enter order id to fulfill: ")))
             
         case 7:
+            print(fulfilled_orders)
             view_orders(orders_list,
                         fulfilled_orders,
                         "fulfilled")
         case 8:
+            print(fulfilled_orders)
             view_orders(orders_list,
                         fulfilled_orders,
                         "all")
@@ -163,5 +169,7 @@ while True:
             compute_revenue_recognized()
         case 10:
             compute_revenue_bookings()
+        case 11:
+            exit()
         
 
