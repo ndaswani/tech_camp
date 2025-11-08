@@ -30,20 +30,20 @@ def view_customers():
 #computing revenue
 
 def compute_revenue_recognized():
-    total_recognized_revenue = 0
-    for i in range (len(orders_list)):
-        if is_order_fulfilled(fulfilled_orders_list, i):
-            (customer_id, product_id, qty) = get_order_details(order_list, order)
-            total += qty*prices_list[product_id]
-    print("Total recognized revenue:", total_recognized_revenue)
+	total_recognized_revenue = 0
+	for i in range (len(orders_list)):
+		if is_order_fulfilled(fulfilled_orders_list, i):
+			(customer_id, product_id, qty) = get_order_details(order_list, order)
+       	total += qty*prices_list[product_id]
+   		print("Total recognized revenue:", total_recognized_revenue)
 
 def	compute_revenue_bookings():
-    total_bookings_revenue = 0
-    for order in orders_list:
-        (customer_id, product_id, qty) =  get_order_details(order_list, order)
-        total+=qty * prices_list[product_id]
-    print("Total bookings revenue:" , total_bookings_revenue)
-	    
+	total_bookings_revenue = 0
+	for order in orders_list:
+		(customer_id, product_id, qty) =  get_order_details(order_list, order)
+      	total+=qty * prices_list[product_id]
+   	print("Total bookings revenue:" , total_bookings_revenue)
+		
 
 # NEIL’S CODE
 
@@ -64,20 +64,20 @@ def view_orders(orders_list, fulfilled_orders, all_or_fulfilled):
                 print_order(orders_list[i])
         elif all_or_fulfilled == "all":
             print_order(orders_list,i)
-            
+        
 def print_order(orders_list, order_id):
     (customer_id, product_id, qty) = get_order_details(orders_list, order_id)
     print ("Order " , order_id)
     print ("  Customer: ", customer_list[customer_id])
     print ("  Product ID: ", product_id)
     print ("  Quantity: ", qty)
-    
+        
 def is_order_fulfilled(fulfilled_orders, order_id):
     for i in range(0,len(fulfilled_orders)):
         if fulfilled_orders[i] == order_id:
             return True
     return False
-
+    
 def fulfill_order(fulfilled_orders, order_id):
     if (not is_order_fulfilled(fulfilled_orders, order_id)):
         fulfilled_orders.append(order_id)
@@ -104,7 +104,7 @@ def get_valid_user_choice():
     while not ((choice >=1) and (choice <=10)):
         if not choice == -1:
             print ("Try again. Choose an option between 1 and 10.")
-            choice = int(input())
+        choice = int(input())
     return choice
 
 while True:
@@ -144,7 +144,7 @@ while True:
         case 10:
             # Abi to create a function that takes "recognized" or "bookings"
             pass
-        
+    
 #SID'S CODE
 # Sid -- please put this into a "add_products" function
 while True:
@@ -156,8 +156,8 @@ while True:
     prices_list.append(price)
     print("Product ID:", len(products_list)-1)
     print()
-    print("All products:", products_list)
-    print("All prices:", prices_list)
+print("All products:", products_list)
+print("All prices:", prices_list)
 
 
 # Test code:
