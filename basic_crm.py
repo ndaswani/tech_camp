@@ -29,33 +29,21 @@ def view_customers():
 
 #computing revenue
 
-def compute_revenue():
-  print("")
-  print("Would you like to compute 'recognized' or 'bookings' revenue?")
-  choice = input("Enter choice: ").lower()
+def compute_revenue_recognized():
+	total_recognized_revenue = 0
+	for i in range (len(orders_list)):
+		if is_order_fulfilled(fulfilled_orders_list, i):
+			(customer_id, product_id, qty) = get_order_details(order_list, order)
+       	total += qty*prices_list[product_id]
+   		print("Total recognized revenue:", total_recognized_revenue)
 
-  total = 0
-
-  if choice == "recognized":
-    for i in range (len(orders_list)):
-      if i in fulfilled_orders_list:
-        order = orders_list[i]
-        product_id = order[1]
-        qty = order[2]
-        total += qty*prices_list[product_id]
-    print("Total recognized revenue:", total)
-    
-  elif choice =="bookings":
-    for order in orders_list:
-      product_id = order[1]
-      qty=order[2]
-      (customer_id, product_id, qty) =  get_order_details(order_list, order)
-      total+=qty * prices_list[product_id]
-    print("Total bookings revenue:" , total)
-
-  else:
-    print("Please enter either 'recognized' or 'bookings'")
-
+def	compute_revenue_bookings():
+	total_bookings_revenue = 0
+	for order in orders_list:
+		(customer_id, product_id, qty) =  get_order_details(order_list, order)
+      	total+=qty * prices_list[product_id]
+   	print("Total bookings revenue:" , total_bookings_revenue)
+		
 
 # NEIL’S CODE
 
@@ -96,6 +84,8 @@ def fulfill_order(fulfilled_orders, order_id):
 
 def display_menu():
     print("""
+Welcome to Basic CRM (Customer Relationship Management)!
+    
 1. Add Customer
 2. View Customers
 3. Add Product
