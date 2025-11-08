@@ -107,6 +107,29 @@ def get_valid_user_choice():
         choice = int(input())
     return choice
 
+
+
+
+
+
+#SID'S CODE
+# Sid -- please put this into a "add_products" function
+def add_product():
+                      
+        while True:
+                name = input("Product name (or 'q' to quit): ")
+                if name.lower() == 'q':
+                        break
+                price = float(input("Product price: "))
+                products_list.append(name)
+                prices_list.append(price)
+                print("Product ID:", len(products_list))
+                print()
+        
+def print_catalog():
+	for i in range(0, len(products_list)):
+		print(products_list[i])
+		print(prices_list[i])
 while True:
     display_menu()
     choice = get_valid_user_choice()
@@ -115,12 +138,10 @@ while True:
             add_customer()
         case 2:
             view_customers()
-        case 3:
-            #add_product() to be implemented by Sid
-            pass
+        case 3:	
+            add_product()	
         case 4:
-            #print catalog to be implemented by Sid
-            pass
+            print_catalog()	
         case 5:
             add_order(orders_list,
                       int(input("Customer id: ")),
@@ -143,27 +164,4 @@ while True:
         case 10:
             compute_revenue_bookings()
         
-#SID'S CODE
-# Sid -- please put this into a "add_products" function
-while True:
-    name = input("Product name (or 'q' to quit): ")
-    if name.lower() == 'q':
-        break
-    price = float(input("Product price: "))
-    products_list.append(name)
-    prices_list.append(price)
-    print("Product ID:", len(products_list)-1)
-    print()
-    print("All products:", products_list)
-    print("All prices:", prices_list)
-
-
-# Test code:
-add_order(orders_list, 0, 0, 1)
-add_order(orders_list, 1, 0, 1)
-print(get_order_details(orders_list, 0))
-print(get_order_details(orders_list, 1))
-print(orders_list)
-
-
 
